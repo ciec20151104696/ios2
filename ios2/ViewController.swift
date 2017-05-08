@@ -42,6 +42,23 @@ class ViewController: UIViewController {
             showone.text = ("0");
             showtwo.text = ("0");
         }
+        if(a==3){
+            let alertVC = UIAlertController(title: "提示", message: "张三胜！！！", preferredStyle: UIAlertControllerStyle.alert)
+            a=0;
+            b=0;
+            text1.text=("\(a)");
+            text2.text=("\(b)");
+            
+            let acSure = UIAlertAction(title: "确定", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
+                print("click Sure")
+            }
+            let acCancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (UIAlertAction) -> Void in
+                print("click Cancel")
+            }
+            alertVC.addAction(acSure)
+            alertVC.addAction(acCancel)
+            self.present(alertVC, animated: true, completion: nil)
+        }
     }
     @IBAction func rightone(_ sender: Any) {
         var score:Int;
@@ -63,6 +80,23 @@ class ViewController: UIViewController {
             text2.text = ("\(b)");
             showone.text = ("0");
             showtwo.text = ("0");
+        }
+        if(b==3){
+            let alertVC = UIAlertController(title: "提示", message: "李四胜！！！", preferredStyle: UIAlertControllerStyle.alert)
+            a=0;
+            b=0;
+            text1.text=("\(a)");
+            text2.text=("\(b)");
+            
+            let acSure = UIAlertAction(title: "确定", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
+                print("click Sure")
+            }
+            let acCancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (UIAlertAction) -> Void in
+                print("click Cancel")
+            }
+            alertVC.addAction(acSure)
+            alertVC.addAction(acCancel)
+            self.present(alertVC, animated: true, completion: nil)
         }
     }
     @IBAction func newleftone(_ sender: Any) {
