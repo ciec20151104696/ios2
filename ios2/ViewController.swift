@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,
+    UIImagePickerControllerDelegate,
+    UINavigationControllerDelegate{
     @IBOutlet weak var showone: UILabel!
     @IBOutlet weak var text1: UILabel!
     @IBOutlet weak var text2: UILabel!
@@ -21,6 +23,30 @@ class ViewController: UIViewController {
     var b:Int=0
     var c:Int=0
     var d:Int=0
+    var dlg:Int=0
+    var flagA:Int=0
+    var flagB:Int=0
+    @IBAction func tu1(_ sender: Any) {
+        if(dlg==0){
+            flagA=1
+            flagB=0
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                //初始化图片控制器
+                let picker = UIImagePickerController()                //设置代理
+                picker.delegate = self
+                //指定图片控制器类型
+                picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+                //弹出控制器，显示界面
+                self.present(picker,animated: true, completion: {
+                    ()->Void in
+                })
+                
+            }else{
+                print("读取相册错误")
+            }
+        }
+        
+}
     @IBAction func leftone(_ sender: Any) {
         var score:Int;
         score = Int(showone.text!)!;
@@ -112,6 +138,25 @@ class ViewController: UIViewController {
         score = Int(newone.text!)!;
         score = score + 1;
         newone.text = ("\(score)");
+        
+        if(c==3){
+            let alertVC = UIAlertController(title: "提示", message: "张三胜！！！", preferredStyle: UIAlertControllerStyle.alert)
+            c=0;
+            d=0;
+            text3.text=("\(c)");
+            text4.text=("\(d)");
+            
+            let acSure = UIAlertAction(title: "确定", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
+                print("click Sure")
+            }
+            let acCancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (UIAlertAction) -> Void in
+                print("click Cancel")
+            }
+            alertVC.addAction(acSure)
+            alertVC.addAction(acCancel)
+            self.present(alertVC, animated: true, completion: nil)
+        }
+
     }
     @IBAction func newrightone(_ sender: Any) {
         var score:Int;
@@ -126,6 +171,23 @@ class ViewController: UIViewController {
         score = Int(newtwo.text!)!;
         score = score + 1;
         newtwo.text = ("\(score)");
+        if(d==3){
+            let alertVC = UIAlertController(title: "提示", message: "张三胜！！！", preferredStyle: UIAlertControllerStyle.alert)
+            c=0;
+            d=0;
+            text3.text=("\(c)");
+            text4.text=("\(d)");
+            
+            let acSure = UIAlertAction(title: "确定", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
+                print("click Sure")
+            }
+            let acCancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (UIAlertAction) -> Void in
+                print("click Cancel")
+            }
+            alertVC.addAction(acSure)
+            alertVC.addAction(acCancel)
+            self.present(alertVC, animated: true, completion: nil)
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
