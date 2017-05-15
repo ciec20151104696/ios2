@@ -19,6 +19,8 @@ class ViewController: UIViewController,
     @IBOutlet weak var newone: UILabel!
     @IBOutlet weak var newtwo: UILabel!
     @IBOutlet weak var text4: UILabel!
+    @IBOutlet weak var image1: UIImageView!
+    @IBOutlet weak var image2: UIImageView!
     var a:Int=0
     var b:Int=0
     var c:Int=0
@@ -47,6 +49,44 @@ class ViewController: UIViewController,
         }
         
 }
+    @IBAction func tu2(_ sender: Any) {
+        if(dlg==0){
+            flagA=0
+            flagB=1
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                //初始化图片控制器
+                let picker = UIImagePickerController()                //设置代理
+                picker.delegate = self
+                //指定图片控制器类型
+                picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+                //弹出控制器，显示界面
+                self.present(picker,animated: true, completion: {
+                    ()->Void in
+                })
+                
+            }else{
+                print("读取相册错误")
+            }
+        }
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        //查看inof对象
+        print(info)
+        //显示的图片
+        let image:UIImage!
+        //获取选择原因
+        image=info[UIImagePickerControllerOriginalImage] as! UIImage
+        if(flagA==1){
+            image1.image = image
+        }
+        else if(flagB==1){
+            image2.image = image
+        }
+        //图片控制器退出
+        picker.dismiss(animated: TUREAD, completion: {
+            ()->Void in
+        })
+    }
     @IBAction func leftone(_ sender: Any) {
         var score:Int;
         score = Int(showone.text!)!;
