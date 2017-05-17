@@ -15,20 +15,15 @@ class ViewController: UIViewController,
     @IBOutlet weak var text1: UILabel!
     @IBOutlet weak var text2: UILabel!
     @IBOutlet weak var showtwo: UILabel!
-    @IBOutlet weak var text3: UILabel!
-    @IBOutlet weak var newone: UILabel!
-    @IBOutlet weak var newtwo: UILabel!
-    @IBOutlet weak var text4: UILabel!
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     var a:Int=0
     var b:Int=0
-    var c:Int=0
-    var d:Int=0
     var dlg:Int=0
     var flagA:Int=0
     var flagB:Int=0
-    @IBAction func tu1(_ sender: Any) {
+    
+    @IBAction func photoOne(_ sender: Any) {
         if(dlg==0){
             flagA=1
             flagB=0
@@ -47,9 +42,8 @@ class ViewController: UIViewController,
                 print("读取相册错误")
             }
         }
-        
-}
-    @IBAction func tu2(_ sender: Any) {
+    }
+    @IBAction func photoTwo(_ sender: Any) {
         if(dlg==0){
             flagA=0
             flagB=1
@@ -70,22 +64,22 @@ class ViewController: UIViewController,
         }
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        //查看inof对象
-        print(info)
-        //显示的图片
-        let image:UIImage!
-        //获取选择原因
-        image=info[UIImagePickerControllerOriginalImage] as! UIImage
-        if(flagA==1){
-            image1.image = image
-        }
-        else if(flagB==1){
-            image2.image = image
-        }
-        //图片控制器退出
-        picker.dismiss(animated: TUREAD, completion: {
-            ()->Void in
-        })
+            //查看inof对象
+            print(info)
+            //显示的图片
+            let image:UIImage!
+            //获取选择原因
+            image=info[UIImagePickerControllerOriginalImage] as! UIImage
+            if(flagA==1){
+                image1.image = image
+            }
+            else if(flagB==1){
+                image2.image = image
+            }
+            //图片控制器退出
+            picker.dismiss(animated: true, completion: {
+                () -> Void in
+            })
     }
     @IBAction func leftone(_ sender: Any) {
         var score:Int;
@@ -165,69 +159,16 @@ class ViewController: UIViewController,
             self.present(alertVC, animated: true, completion: nil)
         }
     }
-    @IBAction func newleftone(_ sender: Any) {
-        var score:Int;
-        score = Int(newone.text!)!;
-        if score>0{
-            score = score - 1;
-            newone.text = ("\(score)");
-        }
-    }
-    @IBAction func newlefttwo(_ sender: Any) {
-        var score:Int;
-        score = Int(newone.text!)!;
-        score = score + 1;
-        newone.text = ("\(score)");
-        
-        if(c==3){
-            let alertVC = UIAlertController(title: "提示", message: "张三胜！！！", preferredStyle: UIAlertControllerStyle.alert)
-            c=0;
-            d=0;
-            text3.text=("\(c)");
-            text4.text=("\(d)");
-            
-            let acSure = UIAlertAction(title: "确定", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
-                print("click Sure")
-            }
-            let acCancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (UIAlertAction) -> Void in
-                print("click Cancel")
-            }
-            alertVC.addAction(acSure)
-            alertVC.addAction(acCancel)
-            self.present(alertVC, animated: true, completion: nil)
-        }
-
-    }
-    @IBAction func newrightone(_ sender: Any) {
-        var score:Int;
-        score = Int(newtwo.text!)!;
-        if score>0{
-            score = score - 1;
-            newtwo.text = ("\(score)");
-        }
-    }
-    @IBAction func newrighttwo(_ sender: Any) {
-        var score:Int;
-        score = Int(newtwo.text!)!;
-        score = score + 1;
-        newtwo.text = ("\(score)");
-        if(d==3){
-            let alertVC = UIAlertController(title: "提示", message: "张三胜！！！", preferredStyle: UIAlertControllerStyle.alert)
-            c=0;
-            d=0;
-            text3.text=("\(c)");
-            text4.text=("\(d)");
-            
-            let acSure = UIAlertAction(title: "确定", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
-                print("click Sure")
-            }
-            let acCancel = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (UIAlertAction) -> Void in
-                print("click Cancel")
-            }
-            alertVC.addAction(acSure)
-            alertVC.addAction(acCancel)
-            self.present(alertVC, animated: true, completion: nil)
-        }
+    @IBAction func change(_ sender: Any) {
+        let image = image2.image
+        image2.image = image1.image
+        image1.image = image
+        let show = showone.text
+        showone.text = showtwo.text
+        showtwo.text = show
+        let text = text1.text
+        text1.text = text2.text
+        text2.text = text
     }
     override func viewDidLoad() {
         super.viewDidLoad()
