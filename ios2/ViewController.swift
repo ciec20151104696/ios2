@@ -169,6 +169,9 @@ class ViewController: UIViewController,
         let text = text1.text
         text1.text = text2.text
         text2.text = text
+        let f = a
+        a = b
+        b = f
     }
     override func viewDidLoad() {
         super.viewDidLoad()
